@@ -1,0 +1,18 @@
+package LifeExpectancy;
+
+import de.fhpotsdam.unfolding.*;
+import processing.core.PApplet;
+
+public class LifeExpectany extends PApplet {
+	UnfoldingMap map;
+	public void setup()
+	{
+		size(800,600,OPENGL);
+		map = new UnfoldingMap(this,50,50,700,500,new Google.GoogleMapProvider());
+		MapUtils.createDefaultEventDispatcher(this,map);
+	}
+	public void draw()
+	{
+		map.draw();
+	}
+}
