@@ -172,6 +172,6 @@ public class EarthquakeCityMap extends PApplet {
 		ellipse(40,250,10,10);
 		fill(0);
 		textSize(15);
-		text("Below 4.0",60,260);
+		text("Below 4.0",60,250);
 	}
 }
