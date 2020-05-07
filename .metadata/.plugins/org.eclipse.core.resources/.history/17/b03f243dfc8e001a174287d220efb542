@@ -1,0 +1,91 @@
+package extension;
+
+import java.util.List;
+
+import de.fhpotsdam.unfolding.UnfoldingMap;
+import de.fhpotsdam.unfolding.data.Feature;
+import de.fhpotsdam.unfolding.data.GeoJSONReader;
+import de.fhpotsdam.unfolding.marker.Marker;
+import de.fhpotsdam.unfolding.providers.Google;
+import de.fhpotsdam.unfolding.providers.OpenStreetMap;
+import de.fhpotsdam.unfolding.utils.MapUtils;
+import module5.CityMarker;
+import module5.CommonMarker;
+import processing.core.PApplet;
+
+public class CoronaCountryMap extends PApplet {
+	private static final long serialVersionUID = 1L;
+	private UnfoldingMap map;
+	private List<Marker> countryMarkers;
+	private List<Feature> countries;
+	private String countryFile = "country-data.json";
+	private CommonMarker lastSelected;
+	private CommonMarker lastClicked;
+	
+	public void setup()
+	{
+		size(900,700,OPENGL);
+		map = new UnfoldingMap(this,200,50,650,600,new Google.GoogleMapProvider());
+		
+		MapUtils.createDefaultEventDispatcher(this, map);
+		countries = GeoJSONReader.loadData(this, countryFile);
+		
+		countryMarkers = MapUtils.createSimpleMarkers(countries);
+		
+		map.addMarkers(countryMarkers);
+		
+	}
+	public void draw() {
+	    background(10);
+	    map.draw();
+	    addKey();
+	}
+
+
+	// helper method to draw key in GUI
+	// TODO: Implement this method to draw the key
+	private void addKey() 
+	{	
+		// Remember you can use Processing's graphics methods here
+		fill(255, 250, 240);
+		
+		int xbase = 25;
+		int ybase = 50;
+		
+		rect(xbase, ybase, 230, 150);
+		
+		fill(0);
+		textAlign(LEFT, CENTER);
+		textSize(12);
+		text("COVID 19", xbase+50, ybase+50);
+		
+		fill(150, 30, 30);
+		int ellipse1basex = xbase + 35;
+		int ellipse1basey = ybase + 50;
+		int ellipse2basex = xbase + 35;
+		int ellipse2basey = ybase + 70;
+		int ellipse3basex = xbase + 35;
+		int ellipse3basey = ybase + 90;
+		fill(0, 0, 0);
+		textAlign(LEFT, CENTER);
+		fill(0, 255, 0);
+		ellipse(ellipse1basex, 
+				ellipse1basey, 
+				10, 
+				10);
+		text("Less than 10k cases", xbase + 50, ybase+50);
+		fill(255,170, 0);
+		ellipse(ellipse2basex, 
+				ellipse2basey, 
+				10, 
+				10);
+		text("Between 10k and 1 lakh cases", xbase+50, ybase+70);
+		fill(255,0, 0);
+		ellipse(ellipse3basex, 
+				ellipse3basey, 
+				10, 
+				10);
+		text("More than 1 lakh cases", xbase+50, ybase+90);
+	}
+	
+}

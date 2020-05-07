@@ -3,6 +3,7 @@ package module6;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.data.PointFeature;
@@ -32,7 +33,7 @@ public class AirportMap extends PApplet {
 		size(800,600, OPENGL);
 		
 		// setting up map and default events
-		map = new UnfoldingMap(this, 50, 50, 750, 550);
+		map = new UnfoldingMap(this, 150, 50, 950, 550);
 		MapUtils.createDefaultEventDispatcher(this, map);
 		
 		// get features from airport data
@@ -46,11 +47,15 @@ public class AirportMap extends PApplet {
 		for(PointFeature feature : features) {
 			AirportMarker m = new AirportMarker(feature);
 	
-			m.setRadius(5);
-			airportList.add(m);
+			//m.setRadius(5);
+			if(Float.parseFloat(feature.getProperty("altitude").toString())>4000){
+				airportList.add(m);
+				//System.out.println(feature.getProperty("altitude"));
+				// put airport in hashmap with OpenFlights unique id for key
+				airports.put(Integer.parseInt(feature.getId()), feature.getLocation());
+			}		
+			//System.out.println(feature.getProperties());
 			
-			// put airport in hashmap with OpenFlights unique id for key
-			airports.put(Integer.parseInt(feature.getId()), feature.getLocation());
 		
 		}
 		
@@ -72,26 +77,70 @@ public class AirportMap extends PApplet {
 			
 			SimpleLinesMarker sl = new SimpleLinesMarker(route.getLocations(), route.getProperties());
 		
-			System.out.println(sl.getProperties());
-			
+			//System.out.println(sl.getProperties());
+			 //System.out.println(route.getLocations());
+			//System.out.println(route.getProperties());
 			//UNCOMMENT IF YOU WANT TO SEE ALL ROUTES
-			//routeList.add(sl);
+			routeList.add(sl);
 		}
 		
 		
 		
 		//UNCOMMENT IF YOU WANT TO SEE ALL ROUTES
-		//map.addMarkers(routeList);
+		
+		map.addMarkers(routeList);
 		
 		map.addMarkers(airportList);
+		/*for(Marker s: airportList){
+			System.out.println(s.getProperties());
+		}*/
 		
 	}
 	
 	public void draw() {
 		background(0);
 		map.draw();
-		
+		addKey();
 	}
 	
+	private void addKey() 
+	{	
+		// Remember you can use Processing's graphics methods here
+		fill(153);
+		rect(10, 250, 150, 150);
+		textSize(18);
+		fill(0, 102, 153, 51);
+		text("Airport key", 15, 270);
+		fill(color(255,0,0));
+		ellipse(30, 290, 18, 18);
+		textSize(12);
+		text("4000+ altitute", 50, 290);
+		fill(color(255, 255, 0));
+		rect(20, 320, 12, 12);
+		textSize(12);
+		text("5000+ altitute", 50, 330);
+		fill(color(0,0,255));
+		triangle(25, 360, 30, 350,35,360);
+		textSize(12);
+		text("6000+ altitute", 50, 360);
+		
+
+	
+	}
+	
+	public void mouseMoved() {
+		// Deselect all marker
+		for (Marker marker : map.getMarkers()) {
+			//if(marker != null && (Float.parseFloat(marker.getProperty("altitude").toString())>4000))
+			marker.setSelected(false);
+		}
+
+		// Select hit marker
+		// Note: Use getHitMarkers(x, y) if you want to allow multiple selection.
+		Marker marker = map.getFirstHitMarker(mouseX, mouseY);
+		if (marker != null) {
+			marker.setSelected(true);
+		}
+	}
 
 }

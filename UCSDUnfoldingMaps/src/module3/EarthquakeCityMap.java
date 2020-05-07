@@ -1,4 +1,4 @@
-package module3;
+	package module3;
 
 //Java utilities libraries
 import java.util.ArrayList;
@@ -112,20 +112,20 @@ public class EarthquakeCityMap extends PApplet {
 		
 		// Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
-	    int yellow = color(255, 255, 0);
+	    int orange = color(255, 175, 0);
 	    int red = color(255,0,0);
-	    int blue = color(0,0,255);
+	    int green = color(0,255,0);
 	    if(mag > THRESHOLD_MODERATE)
 	    {
 	    	marker.setColor(red);
 	    }
 	    else if(mag <= THRESHOLD_MODERATE && mag > THRESHOLD_LIGHT)
 	    {
-	    	marker.setColor(yellow);
+	    	marker.setColor(orange);
 	    }
 	    else
 	    {
-	    	marker.setColor(blue);
+	    	marker.setColor(green);
 	    }
 		
 		// TODO (Step 4): Add code below to style the marker's size and color 
@@ -153,25 +153,46 @@ public class EarthquakeCityMap extends PApplet {
 	private void addKey() 
 	{	
 		// Remember you can use Processing's graphics methods here
-		fill(150,150,150);
-		rect(25,100,160,300);
+		fill(255, 250, 240);
+		
+		int xbase = 25;
+		int ybase = 50;
+		
+		rect(xbase, ybase, 230, 150);
+		
 		fill(0);
-		textSize(15);
-		text("Earthquake key",50,125);		
-		fill(255,0,0);
-		ellipse(40,150,30,30);
-		fill(0);
-		textSize(15);
-		text("5.0+ Magnitude",60,160);
-		fill(255,255,0);
-		ellipse(40,200,20,20);
-		fill(0);
-		textSize(15);
-		text("4.0+ Magnitude",60,210);
-		fill(0,0,255);
-		ellipse(40,250,10,10);
-		fill(0);
-		textSize(15);
-		text("Below 4.0",60,250);
+		textAlign(LEFT, CENTER);
+		textSize(12);
+		text("COVID 19", xbase+50, ybase+30);
+		
+		fill(150, 30, 30);
+		int ellipse1basex = xbase + 35;
+		int ellipse1basey = ybase + 50;
+		int ellipse2basex = xbase + 35;
+		int ellipse2basey = ybase + 70;
+		int ellipse3basex = xbase + 35;
+		int ellipse3basey = ybase + 90;
+		fill(0, 0, 0);
+		textAlign(LEFT, CENTER);
+		fill(0, 255, 0);
+		ellipse(ellipse1basex, 
+				ellipse1basey, 
+				10, 
+				10);
+		text("Less than 10k cases", xbase + 50, ybase+50);
+		fill(255,170, 0);
+		ellipse(ellipse2basex, 
+				ellipse2basey, 
+				10, 
+				10);
+		text("Between 10k and 1 lakh cases", xbase+50, ybase+70);
+		fill(255,0, 0);
+		ellipse(ellipse3basex, 
+				ellipse3basey, 
+				
+				
+				10, 
+				10);
+		text("More than 1 lakh cases", xbase+50, ybase+90);
 	}
 }

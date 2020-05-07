@@ -1,0 +1,7 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","properties":{"name":"Algeria","confirmed":4648,"recovered":1998,"deaths":465},"geometry":{"type":"Point","coordinates":[27.7994, -7.3577097]}},
+{"type":"Feature","properties":{"name":"Angola","confirmed":35,"recovered":11,"deaths":2},"geometry":{"type":"Point","coordinates":[11.07746, 8.7288528]}},
+{"type":"Feature","properties":{"name":"Benin","confirmed":96,"recovered":50,"deaths":2},"geometry":{"type":"Point","coordinates":[9.30033, 0.06484]}},
+{"type":"Feature","properties":{"name":"Benin","confirmed":96,"recovered":50,"deaths":2},"geometry":{"type":"Point","coordinates":[9.30033, 0.06484]}},
+]
+}

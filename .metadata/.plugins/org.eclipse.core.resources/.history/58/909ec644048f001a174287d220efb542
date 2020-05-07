@@ -1,0 +1,11 @@
+package extension;
+
+import de.fhpotsdam.unfolding.data.Feature;
+import de.fhpotsdam.unfolding.data.PointFeature;
+
+public class CountryMarker extends SimplePointMarker {
+	public CityMarker(Feature city) {
+		super(((PointFeature)city).getLocation(), city.getProperties());
+	}
+
+}
